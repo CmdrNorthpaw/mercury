@@ -44,12 +44,19 @@ repositories {
 }
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.10"
+
     implementation "org.eclipse.jetty:jetty-server:11.0.0.beta2"
+
+    // Ktor artifacts
     implementation "io.ktor:ktor-client-core-jvm:1.4.1"
     implementation "io.ktor:ktor-client-core:1.4.1"
     implementation "io.ktor:ktor-client-jetty:1.4.1"
     implementation "io.kotr:kotr-client-json:1.4.1"
+
     implementation 'com.beust:klaxon:5.0.1'
+
+
 }
 compileKotlin {
     kotlinOptions {
