@@ -1,0 +1,8 @@
+name: Mercury
+version: @version@
+main: uk.cmdrnorthpaw.mercury.MercurySpigot
+api-version: 1.16
+prefix: Mercury
+authors: [ CmdrNorthpaw ]
+description: Mercury is a plugin install and update management system for Minecraft servers
+website: https://github.com/CmdrNorthpaw/Mercury
