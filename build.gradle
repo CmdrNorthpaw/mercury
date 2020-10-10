@@ -30,17 +30,21 @@ subprojects {
 }
 repositories {
     mavenCentral()
+    jcenter()
+    maven {url = $/https://jitpack.io/$ }
 }
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "com.github.ascclemens:khttp:master-SNAPSHOT"
+    implementation "com.beust.klaxon:5.0.1"
 }
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
