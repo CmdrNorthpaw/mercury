@@ -7,6 +7,8 @@ import io.ktor.client.engine.jetty.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import java.io.File
+
 
 data class OreResource(
         @Json(name = "pluginId") val id: String,
@@ -15,6 +17,24 @@ data class OreResource(
         val description: String,
         @Json(name = "recommended") val file: OreFile
 ) {
+
+    suspend fun download(version: Float = 0F) {
+        val client = HttpClient(Jetty)
+        val target = File(this.id)
+        val requestBytes: ByteArray
+
+        requestBytes = if (version == 0F) {
+            client.get("https://ore.spongepowered.org/api/v1/projects/${this.id}/versions/recommended")
+        } else {
+            client.get(
+                    "https://ore.spongepowered.org/api/v1/projects/${this.id}/versions/$version/download"
+            )
+        }
+        target.writeBytes(requestBytes)
+
+        client.close()
+    }
+
     companion object {
         suspend fun get(pluginId: String): OreResource? {
             val client = HttpClient(Jetty)
