@@ -1,5 +1,6 @@
-package apis.spiget
+package uk.cmdrnorthpaw.mercury.apis.spiget
 
+import apis.spiget.SpigotFile
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Klaxon
 import com.sun.org.apache.xpath.internal.operations.Bool
@@ -9,7 +10,6 @@ import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import javafx.application.Application.launch
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
