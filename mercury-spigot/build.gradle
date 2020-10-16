@@ -31,6 +31,8 @@ repositories {
 dependencies {
     compile project(':mercury-common')
     compileOnly 'org.spigotmc:spigot-api:1.16.3-R0.1-SNAPSHOT'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0-M1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
