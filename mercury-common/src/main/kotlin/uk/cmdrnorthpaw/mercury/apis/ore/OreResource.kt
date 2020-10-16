@@ -19,9 +19,8 @@ data class OreResource(
         @Json(name = "recommended") val file: OreFile
 ) {
 
-    suspend fun download(version: Float = 0F) {
+    suspend fun download(target: File, version: Float = 0F) {
         val client = HttpClient(Jetty)
-        val target = File(this.id)
         val requestBytes: ByteArray
 
         requestBytes = if (version == 0F) {
