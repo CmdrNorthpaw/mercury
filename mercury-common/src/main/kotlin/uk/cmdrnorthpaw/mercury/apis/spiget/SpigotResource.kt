@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 
 data class SpigotResource(
-        val external: Bool,
+        val external: Boolean,
         val file: SpigotFile,
         val contributors: List<String>,
         val versions: List<Int>,
