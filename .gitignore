@@ -116,3 +116,7 @@ run/
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
+
+mercury-common/build/
+mercury-spigot/build/
+mercury-sponge/build
