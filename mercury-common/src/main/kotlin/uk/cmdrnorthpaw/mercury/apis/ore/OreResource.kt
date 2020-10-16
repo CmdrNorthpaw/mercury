@@ -1,5 +1,6 @@
 package apis.ore
 
+import apis.NotFoundException
 import com.beust.klaxon.Json
 import com.beust.klaxon.Klaxon
 import io.ktor.client.*
@@ -40,7 +41,7 @@ data class OreResource(
             val client = HttpClient(Jetty)
 
             val request: HttpResponse = client.get("https://ore.spongepowered.com/api/v1/$pluginId")
-            if (request.status == HttpStatusCode.NotFound) return null
+            if (request.status == HttpStatusCode.NotFound) throw NotFoundException("Could not find that plugin")
 
             val resource = Klaxon().parse<OreResource>(request.readText())
             return resource

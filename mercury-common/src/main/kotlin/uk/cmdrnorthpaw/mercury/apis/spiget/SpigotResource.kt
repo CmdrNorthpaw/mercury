@@ -1,5 +1,6 @@
 package uk.cmdrnorthpaw.mercury.apis.spiget
 
+import apis.NotFoundException
 import apis.spiget.SpigotFile
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Klaxon
@@ -30,11 +31,11 @@ data class SpigotResource(
     companion object {
         private val client = HttpClient(Jetty)
 
-        suspend fun get(id: Int): SpigotResource? {
+        suspend fun get(id: Int): SpigotResource {
             val response: HttpResponse = client.get("https://api.spiget.org/v2/resources/$id")
-            if (response.status == HttpStatusCode.NotFound) return null
+            if (response.status == HttpStatusCode.NotFound) throw NotFoundException("Could not find that plugin")
 
-            val responseJson = Klaxon().parse<SpigotResource>(response.readText(Charsets.UTF_8))
+            val responseJson = Klaxon().parse<SpigotResource>(response.readText(Charsets.UTF_8))!!
             return responseJson
         }
     }
