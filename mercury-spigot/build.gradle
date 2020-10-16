@@ -1,5 +1,19 @@
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'kotlin'
+buildscript {
+    ext.kotlin_version = '1.4.10'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "org.jetbrains.kotlin.jvm" version "1.4.10"
+}
+
+tasks.build.dependsOn tasks.shadowJar
 
 repositories {
     maven {
@@ -11,6 +25,7 @@ repositories {
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -31,23 +46,6 @@ shadowJar {
     }
 }
 
-tasks.build.dependsOn tasks.shadowJar
-buildscript {
-    ext.kotlin_version = '1.4.10'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-}
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+tasks.compileKotlin {
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }

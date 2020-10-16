@@ -9,10 +9,9 @@ buildscript {
 }
 plugins {
     id 'org.spongepowered.plugin' version '0.9.0'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "org.jetbrains.kotlin.jvm" version "1.4.10"
 }
-
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'kotlin'
 
 dependencies {
     compile project(':mercury-common')
@@ -22,6 +21,11 @@ dependencies {
 }
 
 sponge.plugin.id = 'mercury-sponge'
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
 
 shadowJar {
     dependencies {
@@ -30,16 +34,9 @@ shadowJar {
 }
 
 tasks.build.dependsOn tasks.shadowJar
-repositories {
-    mavenCentral()
+
+tasks.compileKotlin {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-}
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-}
+
