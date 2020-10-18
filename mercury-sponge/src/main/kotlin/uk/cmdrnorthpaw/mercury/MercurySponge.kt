@@ -4,10 +4,12 @@ import com.google.inject.Inject
 import ninja.leaping.configurate.commented.CommentedConfigurationNode
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader
 import ninja.leaping.configurate.loader.ConfigurationLoader
+import org.spongepowered.api.Sponge
 import org.spongepowered.api.config.DefaultConfig
 import org.spongepowered.api.event.Listener
 import org.spongepowered.api.event.game.state.GameStartedServerEvent
 import org.spongepowered.api.plugin.Plugin
+import java.io.File
 import java.nio.file.Path
 
 @Plugin(
@@ -19,9 +21,11 @@ import java.nio.file.Path
 )
 object MercurySponge {
 
+    val dataFolder = File(Sponge.getGame().gameDirectory.toFile(), "mercury-data")
     @Listener
     fun onEnable(event: GameStartedServerEvent) {
-
+        // Create data folder if it does not exist
+        dataFolder.mkdirs()
     }
 
     @Inject
