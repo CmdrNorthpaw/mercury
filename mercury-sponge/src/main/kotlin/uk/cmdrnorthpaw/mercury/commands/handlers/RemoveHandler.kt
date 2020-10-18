@@ -6,6 +6,7 @@ import org.spongepowered.api.command.CommandSource
 import org.spongepowered.api.command.args.CommandContext
 import org.spongepowered.api.text.Text
 import org.spongepowered.api.text.format.TextColors
+import uk.cmdrnorthpaw.mercury.MercurySponge
 import java.io.File
 
 fun remove(src: CommandSource, args: CommandContext): CommandResult {
@@ -14,7 +15,6 @@ fun remove(src: CommandSource, args: CommandContext): CommandResult {
         src.sendMessage(Text.builder("ERROR! You need to specify a plugin id!").color(TextColors.RED).build())
         return CommandResult.empty()
     }
-
-    File(Sponge.getGame().gameDirectory.toFile(), "mods/${pluginId.get()}").delete()
+    File(MercurySponge.config.pluginPath + "/${pluginId.get()}").delete()
     return CommandResult.success()
 }
