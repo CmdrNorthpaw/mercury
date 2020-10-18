@@ -1,5 +1,8 @@
 package uk.cmdrnorthpaw.mercury;
 
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.google.inject.Inject
 import ninja.leaping.configurate.commented.CommentedConfigurationNode
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader
@@ -43,6 +46,13 @@ object MercurySponge {
                 .build()
         val configNode = configLoader.load()
         return Config.loadFrom(configNode)
+    }
+
+    private val versionsFile = File(dataFolder, "versions.json")
+    var versions: JsonObject
+    get() = JsonParser().parse(versionsFile.readText()).asJsonObject
+    set(value) {
+        versionsFile.writeText(value.asString)
     }
 
 }
