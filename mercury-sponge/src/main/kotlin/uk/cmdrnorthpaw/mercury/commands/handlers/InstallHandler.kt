@@ -1,5 +1,6 @@
 package uk.cmdrnorthpaw.mercury.commands.handlers
 
+import apis.NotFoundException
 import apis.ore.OreResource
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,7 +21,15 @@ fun install(src: CommandSource, args: CommandContext): CommandResult {
         src.sendMessage(Text.builder("ERROR! You need to specify a plugin id!").color(TextColors.RED).build())
         return CommandResult.empty()
     }
-    val plugin = runBlocking { OreResource.get(pluginId.get()) }
+
+    val plugin: OreResource?
+    try {
+        plugin = runBlocking { OreResource.get(pluginId.get()) }
+    } catch (error: NotFoundException) {
+        src.sendMessage(Text.builder("Plugin not found on Ore").color(TextColors.RED).build())
+        return CommandResult.empty()
+    }
+
     val version = args.getOne<Float>("version")
 
     val targetFile = File(MercurySponge.config.pluginPath + "/${plugin?.id}")
