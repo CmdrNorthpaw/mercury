@@ -40,7 +40,6 @@ object MercurySponge {
         val configNode = configLoader.load()
         return Config.loadFrom(configNode)
     }
-    val MOD_LOCATION = config.pluginPath
 
 }
 
