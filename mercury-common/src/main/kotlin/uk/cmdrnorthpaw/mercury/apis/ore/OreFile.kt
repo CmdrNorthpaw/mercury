@@ -12,7 +12,9 @@ data class OreFile(
     @Json(name = "staffApproved") val approved: Boolean,
     val href: String
 
-)
+) {
+    val version = href.split("/").last().toFloat()
+}
 
 data class OreDependency(
         @Json(name = "pluginId") val id: String,
