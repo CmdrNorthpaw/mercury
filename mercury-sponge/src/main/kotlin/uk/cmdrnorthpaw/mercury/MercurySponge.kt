@@ -2,6 +2,7 @@ package uk.cmdrnorthpaw.mercury;
 
 import com.google.inject.Inject
 import ninja.leaping.configurate.commented.CommentedConfigurationNode
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader
 import ninja.leaping.configurate.loader.ConfigurationLoader
 import org.spongepowered.api.config.DefaultConfig
 import org.spongepowered.api.event.Listener
@@ -30,6 +31,15 @@ object MercurySponge {
     @Inject
     @DefaultConfig(sharedRoot = true)
     private val configNode: ConfigurationLoader<CommentedConfigurationNode>? = null
+
+    val config: Config
+    get() {
+        val configLoader = HoconConfigurationLoader.builder()
+                .setPath(configFile!!)
+                .build()
+        val configNode = configLoader.load()
+        return Config.loadFrom(configNode)
+    }
 
 }
 
