@@ -12,6 +12,7 @@ import org.spongepowered.api.config.DefaultConfig
 import org.spongepowered.api.event.Listener
 import org.spongepowered.api.event.game.state.GameStartedServerEvent
 import org.spongepowered.api.plugin.Plugin
+import uk.cmdrnorthpaw.mercury.commands.registerCommands
 import java.io.File
 import java.nio.file.Path
 
@@ -29,6 +30,9 @@ object MercurySponge {
     fun onEnable(event: GameStartedServerEvent) {
         // Create data folder if it does not exist
         dataFolder.mkdirs()
+
+        // Register commands (duh)
+        registerCommands()
     }
 
     @Inject
