@@ -24,7 +24,7 @@ fun install(src: CommandSource, args: CommandContext): CommandResult {
 
     val plugin: OreResource?
     try {
-        plugin = runBlocking { OreResource.get(pluginId.get()) }
+        plugin = runBlocking { OreResource.get(pluginId.get())!! }
     } catch (error: NotFoundException) {
         src.sendMessage(Text.builder("Plugin not found on Ore").color(TextColors.RED).build())
         return CommandResult.empty()
@@ -34,6 +34,16 @@ fun install(src: CommandSource, args: CommandContext): CommandResult {
 
     val targetFile = File(MercurySponge.config.pluginPath + "/${plugin?.id}")
 
-    GlobalScope.launch { if (version.isPresent) plugin?.download(targetFile) else plugin?.download(targetFile, version.get()) }
+    GlobalScope.launch {
+        val localVersions = MercurySponge.versions
+
+        if (version.isPresent) {
+            plugin.download(targetFile)
+            localVersions.addProperty(plugin.id, plugin.file.version)
+        } else {
+            plugin.download(targetFile, version.get())
+            localVersions.addProperty(plugin.id, version.get())
+        }
+    }
     return CommandResult.success()
 }

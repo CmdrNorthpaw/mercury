@@ -17,8 +17,11 @@ fun remove(src: CommandSource, args: CommandContext): CommandResult {
         return CommandResult.empty()
     }
 
+    val localVersions = MercurySponge.versions
     return try {
         File(MercurySponge.config.pluginPath + "/${pluginId.get()}").delete()
+        localVersions.remove(pluginId.get())
+        MercurySponge.versions = localVersions
         CommandResult.success()
     } catch (error: FileNotFoundException) {
         src.sendMessage(Text.of("This plugin does not exist! Please note that the plugin needs to be installed by mercury to be managed by it."))
