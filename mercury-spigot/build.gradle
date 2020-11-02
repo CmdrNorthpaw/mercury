@@ -1,16 +1,10 @@
 buildscript {
     ext.kotlin_version = '1.4.10'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
 }
 
 plugins {
     id "com.github.johnrengelman.shadow" version "5.2.0"
-    id "org.jetbrains.kotlin.jvm" version "1.4.10"
+    id 'java'
 }
 
 tasks.build.dependsOn tasks.shadowJar
@@ -48,6 +42,3 @@ shadowJar {
     }
 }
 
-tasks.compileKotlin {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-}
