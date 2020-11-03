@@ -1,5 +1,5 @@
 name: Mercury
-version: @version@
+version: $version
 main: uk.cmdrnorthpaw.mercury.MercurySpigot
 api-version: 1.16
 prefix: Mercury
